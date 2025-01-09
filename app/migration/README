@@ -1,0 +1,17 @@
+Generic single-database configuration.
+- Using Alembic for migration
+
+- Create a new migration file
+```bash
+alembic revision -m "<comment>"
+```
+
+- Execute a new migration file
+```bash
+alembic upgrade <revision identity>
+```
+
+- Roll back a new migration file
+```bash
+alembic downgrade <revision identity>
+```
