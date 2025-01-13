@@ -11,7 +11,7 @@ alembic revision -m "<comment>"
 alembic upgrade <revision identity>
 ```
 
-- Roll back a new migration file
+- Roll back a migration file
 ```bash
 alembic downgrade <revision identity>
 ```

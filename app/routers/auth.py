@@ -1,3 +1,4 @@
+from datetime import timedelta
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
@@ -16,10 +17,8 @@ async def login_for_access_token(
     user = auth_services.autheticate_user(form_data.username, form_data.password, db)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    
-    token = auth_services.create_access_token(user)
 
     return {
-        "access_token": token,
+        "access_token": auth_services.create_access_token(user, timedelta(minutes=10)),
         "token_type": "bearer"
     }

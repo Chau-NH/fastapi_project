@@ -1,9 +1,14 @@
 # FastAPI Project
 
-- Run Postgresql locally
+- Run Postgresql server locally
 ```bash
 cd docker
 docker compose up -d
+```
+- Run Migration script
+```bash
+cd app
+alembic upgrade head
 ```
 
 - Start server
@@ -11,5 +16,3 @@ docker compose up -d
 cd app
 uvicorn main:app --reload
 ```
-
-- Run Migration

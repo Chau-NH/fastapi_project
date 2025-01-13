@@ -9,6 +9,13 @@ class UserModel(BaseModel):
     password: str = Field(min_length=6, max_length=20)
     first_name: str
     last_name: str
+    email: Optional[str] | None = None
+    company_id: Optional[UUID] | None = None
+
+class UserUpdateModel(BaseModel):
+    username: str = Field(min_length=6)
+    first_name: str
+    last_name: str
     email: Optional[str]
     company_id: Optional[UUID]
 
