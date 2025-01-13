@@ -13,10 +13,14 @@ router = APIRouter(prefix="/tasks", tags=["Task"])
 @router.get("", status_code=status.HTTP_200_OK)
 async def get_tasks(
         db: Session = Depends(get_db_context),
-        user: User = Depends(auth_service.token_interceptor)
+        user: User = Depends(auth_service.token_interceptor),
     ) -> Page[TaskViewModel]:
-    tasks = db.query(Task).all()
-    return paginate(tasks)
+    tasks = db.query(Task)
+
+    if not user.is_admin:
+        return paginate(tasks.filter(Task.reporter_id == user.id).all())
+
+    return paginate(tasks.all())
 
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def create_task(
